@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:graduation_project_2023/core/init/navigation/app_router.dart';
 
 import '../../../core/constants/enums/locale_keys_enum.dart';
 import '../../../core/init/cache/locale_manager.dart';
@@ -102,4 +104,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> login() async {}
+  void navigateResetPasswordPage() {
+    buildContext!.router.replace(const ResetPasswordRoute());
+  }
 }

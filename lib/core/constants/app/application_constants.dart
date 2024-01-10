@@ -6,4 +6,5 @@ class ApplicationConstants {
   static const ON_BOARD_ID = 'onBoardContainer';
   static const LOGIN_BUTTON_ID = 'loginButton';
   static const SCAFFOLD_ID = 'scaffold';
+  static const EMAIL_REGIEX = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$';
 }

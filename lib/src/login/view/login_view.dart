@@ -130,7 +130,7 @@ class LoginView extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () {},
+            onTap: () => viewmodel.navigateResetPasswordPage(),
             child: Text(
               LocaleKeys.login_forgot_password.tr(),
               style: context.textTheme.bodyLarge!
