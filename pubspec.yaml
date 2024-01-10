@@ -50,6 +50,7 @@ dependencies:
   form_builder_validators: ^9.1.0
   json_serializable: ^6.7.1
   json_annotation: ^4.8.1
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_2023/core/init/navigation/app_router.dart';
 import '../../../../core/base/model/base_view_model.dart';
 import 'package:mobx/mobx.dart';
 part 'activation_code_view_model.g.dart';
@@ -70,7 +71,9 @@ abstract class _ActivationViewModelBase with Store, BaseViewModel {
     isLoading = !isLoading;
   }
 
-  void navigateCreatePassword() {}
+  void navigateCreatePassword() {
+    buildContext!.router.replace(const CreatePasswordRoute());
+  }
 
   void returnPreviousPage() {
     buildContext!.router.pop();

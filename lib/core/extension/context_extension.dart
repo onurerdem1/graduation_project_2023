@@ -1,6 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:graduation_project_2023/core/constants/image/lottie_constants.dart';
+import 'package:lottie/lottie.dart';
+
+import '../constants/image/image_constants.dart';
+import '../constants/image/svg_constants.dart';
 
 extension ContextExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
@@ -99,4 +106,21 @@ extension DurationExtension on BuildContext {
   Duration get duration1000 => const Duration(milliseconds: 1000);
   Duration get duration2000 => const Duration(milliseconds: 2000);
   Duration get duration3000 => const Duration(milliseconds: 3000);
+}
+
+extension AppIconExtension on BuildContext {
+  Row get appIcon => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(ImageConstants.instance.splashIcon),
+          SizedBox(width: 5.w),
+          SvgPicture.asset(SVGImageConstants.instance.appName),
+        ],
+      );
+
+  SizedBox get animation => SizedBox(
+        width: 70.w,
+        height: 70.w,
+        child: LottieBuilder.asset(LottieImageConstants.instance.animation),
+      );
 }

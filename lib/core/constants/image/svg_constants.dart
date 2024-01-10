@@ -6,6 +6,6 @@ class SVGImageConstants {
 
   SVGImageConstants._init();
   String get splashLogo => toSvg('splash_logo');
-
+  String get appName => toSvg('app_name');
   String toSvg(String name) => 'assets/svg/$name.svg';
 }

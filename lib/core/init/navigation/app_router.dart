@@ -4,6 +4,7 @@ import '../../../src/splash/view/splash_view.dart';
 import '../../../src/login/view/login_view.dart';
 import '../../../src/forgotPassword/view/forgot_password_view.dart';
 import '../../../src/activationCode/view/activation_code_view.dart';
+import '../../../src/createPassword/view/create_password_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -26,6 +27,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ActivationPageRoute.page,
           path: '/activationCode',
+        ),
+        AutoRoute(
+          page: CreatePasswordRoute.page,
+          path: '/createPassword',
         ),
         //routes
       ];

@@ -5,6 +5,6 @@ class LottieImageConstants {
       _instace ??= LottieImageConstants._init();
 
   LottieImageConstants._init();
-
-  String toLottie(String name) => 'assets/lottie/$name.json';
+  String get animation => toLottie('animation');
+  String toLottie(String name) => 'assets/images/$name.json';
 }

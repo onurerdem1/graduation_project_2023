@@ -36,8 +36,8 @@ class AppThemeLight extends AppTheme {
         onError: Color(0xffffffff),
         surface: Color(0xffE6EBF3),
         onSurface: Color(0xff596372), //
-        tertiary: Color(0xff515BF6), //
-        tertiaryContainer: Color(0xff59C08D), //
+        tertiary: Color(0xff59C08D), //
+        tertiaryContainer: Color(0xff515BF6), //
         onTertiary: Color(0xffABB3BB), //
         onSurfaceVariant: Color(0xff525978), //
         secondaryContainer: Color(0xFFE5E5E5), //

@@ -3,8 +3,6 @@ import 'package:graduation_project_2023/core/extension/string_extension.dart';
 import '../../../core/base/view/base_view.dart';
 import '../../../core/constants/app/application_constants.dart';
 import '../viewmodel/forgot_password_view_model.dart';
-import '/core/constants/image/svg_constants.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/extension/context_extension.dart';
 import '../../../core/init/lang/locale_keys.g.dart';
@@ -148,9 +146,9 @@ class ResetPasswordView extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(top: context.value1, left: 10.w),
           height: 70.h,
-          width: 120.w,
-          child: SvgPicture.asset(SVGImageConstants.instance.splashLogo),
+          child: context.appIcon,
         ),
+        context.animation
       ],
     );
   }

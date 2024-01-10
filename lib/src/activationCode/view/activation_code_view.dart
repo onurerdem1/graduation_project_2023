@@ -7,8 +7,6 @@ import '/core/extension/context_extension.dart';
 import '/core/extension/string_extension.dart';
 import '/core/init/lang/locale_keys.g.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../core/constants/image/svg_constants.dart';
 
 @RoutePage<String>(name: 'ActivationPageRoute')
 class ActivationView extends StatelessWidget {
@@ -125,7 +123,7 @@ class ActivationView extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: context.colorScheme.onTertiary),
-          onPressed: () => viewmodel.sendAuthCode(),
+          onPressed: () => viewmodel.navigateCreatePassword(),
           child: Text(LocaleKeys.reset_password_next.locale)),
     );
   }
