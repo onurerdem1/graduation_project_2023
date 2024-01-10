@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:graduation_project_2023/core/init/navigation/app_router.dart';
+
 import '../../../core/base/model/base_view_model.dart';
 import '/core/extension/context_extension.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +31,10 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   void init() async {
     await startTimer();
     //await LocaleManager.instance.setStringValue(PreferencesKeys.TOKEN, '');
-    //_navigateOnBoard();
+    _navigateOnBoard();
   }
 
-  Future<void> _navigateOnBoard() async {}
+  Future<void> _navigateOnBoard() async {
+    buildContext!.router.replace(const LoginRoute());
+  }
 }

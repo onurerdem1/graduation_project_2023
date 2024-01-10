@@ -1,1 +1,48 @@
-{}
+{
+    "login": {
+        "hello": "Merhaba!",
+        "description": "Hesabınız ile devam etmek için giriş yapın.",
+        "username": "Kullanıcı Adı",
+        "email": "E-posta",
+        "password": "Şifre",
+        "login": "Giriş Yap",
+        "forgot_password": "Şifreni mi unuttun?",
+        "dont_have_account": "Hesabın yok mu? ",
+        "register_here": "Kayıt Ol",
+        "register": "Kayıt Ol",
+        "enter_valid_email": "Lütfen geçerli bir e-posta giriniz",
+        "email_required": "E-posta gereklidir.",
+        "password_required": "Lütfen bir şifre giriniz",
+        "logout": "Çıkış Yap",
+        "remember_me": "Beni Hatırla",
+        "login_success": "Giriş başarılı.",
+        "login_error": "Giriş yapılamadı."
+    },
+    "reset_password": {
+        "email_Phone": "E Mail",
+        "send_code": "Kodu Gönder",
+        "login_with_code": "Aktivasyon Kodu İle Giriş Yap",
+        "auth_code": "Doğrulama",
+        "auth_code_description": "Mailinize gelen 6 haneli doğrulama kodunu giriniz.",
+        "next": "Devam Et",
+        "code_expire_note": "2 dakika içerisinde kod gelmediyse, tekrar gönder'e tıklayın.",
+        "resend_code": "Tekrar Gönder",
+        "code_send_successfull": "Kod başarıyla gönderildi.",
+        "code_send_error": "Kod gönderilemedi.",
+        "auth": {
+            "resend_time": "Kalan Süre:",
+            "code_correct": "Kod doğrulama başarılı.",
+            "code_incorrect": "Hatalı kod girildi."
+        }
+    },
+    "create_password": {
+        "create_new_password": "Yeni Şifre Oluştur",
+        "create_password_description": "Kendine kalıcı bir şifre belirle.",
+        "password": "Şifre",
+        "password_reenter": "Şifre Tekrar",
+        "response_type": {
+            "true": "Şifre değiştirme başarılı.",
+            "false": "Bir hata oluştu."
+        }
+    }
+}

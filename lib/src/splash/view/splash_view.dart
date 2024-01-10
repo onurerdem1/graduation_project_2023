@@ -32,7 +32,7 @@ class SplashView extends StatelessWidget {
               child: Center(
                 child: SizedBox(
                   height: context.height,
-                  width: 200.w,
+                  width: 150.w,
                   child:
                       SvgPicture.asset(SVGImageConstants.instance.splashLogo),
                 ),
