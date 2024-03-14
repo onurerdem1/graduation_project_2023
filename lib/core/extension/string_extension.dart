@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 
 import '../constants/app/application_constants.dart';
+import '../constants/image/svg_constants.dart';
+import '../init/navigation/app_router.dart';
 
 extension StringLocalization on String {
   String get locale => this.tr();
@@ -40,6 +42,22 @@ extension LanguageExtension on String {
 
       default:
         return '';
+    }
+  }
+}
+
+extension BottombarIconExtension on String {
+  String get bottombarIcon {
+    switch (this) {
+      case HomepageRoute.name:
+        return SVGImageConstants.instance.homeIcon;
+      case HistoryPageRoute.name:
+        return SVGImageConstants.instance.calendarIcon;
+      case ProfileRoute.name:
+        return SVGImageConstants.instance.notificationIcon;
+
+      default:
+        return SVGImageConstants.instance.homeIcon;
     }
   }
 }

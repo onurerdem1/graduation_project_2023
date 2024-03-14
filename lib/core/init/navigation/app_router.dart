@@ -5,6 +5,10 @@ import '../../../src/login/view/login_view.dart';
 import '../../../src/forgotPassword/view/forgot_password_view.dart';
 import '../../../src/activationCode/view/activation_code_view.dart';
 import '../../../src/createPassword/view/create_password_view.dart';
+import '../../../src/autotabs/view/auto_tabs_view.dart';
+import '../../../src/autotabs/subviews/homepage/view/homepage_view.dart';
+import '../../../src/autotabs/subviews/profile/view/profile_view.dart';
+import '../../../src/autotabs/subviews/saleHistory/view/history_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -32,6 +36,20 @@ class AppRouter extends _$AppRouter {
           page: CreatePasswordRoute.page,
           path: '/createPassword',
         ),
+        AutoRoute(page: AutoTabsRoute.page, path: '/autoTabs', children: [
+          AutoRoute(
+            page: HomepageRoute.page,
+            path: 'homePage',
+          ),
+          AutoRoute(
+            page: HistoryPageRoute.page,
+            path: 'history',
+          ),
+          AutoRoute(
+            page: ProfileRoute.page,
+            path: 'profile',
+          ),
+        ])
         //routes
       ];
 }

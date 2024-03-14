@@ -114,7 +114,6 @@ extension AppIconExtension on BuildContext {
         children: [
           Image.asset(ImageConstants.instance.splashIcon),
           SizedBox(width: 5.w),
-          SvgPicture.asset(SVGImageConstants.instance.appName),
         ],
       );
 
