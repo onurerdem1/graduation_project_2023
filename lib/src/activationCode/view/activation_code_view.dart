@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../core/base/view/base_view.dart';
@@ -10,16 +11,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage<String>(name: 'ActivationPageRoute')
 class ActivationView extends StatelessWidget {
+
   const ActivationView(
-      {Key? key, required this.email, required this.resendCodeFunc})
+      {Key? key, required this.email, required this.resendCodeFunc, required this.resetCodeX})
       : super(key: key);
   final String email;
   final Future<void> Function() resendCodeFunc;
+  final EmailOTP resetCodeX;
 
   @override
   Widget build(BuildContext context) {
     return BaseView<ActivationViewModel>(
-      viewModel: ActivationViewModel(resendCodeFunc, email: email),
+      viewModel: ActivationViewModel(resendCodeFunc, resetCodeX, email: email,),
       onModelReady: (viewmodel) {
         viewmodel.setContext(context);
         viewmodel.init();

@@ -15,12 +15,15 @@ import '../viewmodel/create_password_view_model.dart';
 
 @RoutePage<String>(name: 'CreatePasswordRoute')
 class CreatePasswordView extends StatelessWidget {
-  const CreatePasswordView({Key? key}) : super(key: key);
+  const CreatePasswordView(
+      {Key? key, required this.email})
+      : super(key: key);
+  final String email;
 
   @override
   Widget build(BuildContext context) {
     return BaseView<CreatePasswordViewModel>(
-      viewModel: CreatePasswordViewModel(),
+      viewModel: CreatePasswordViewModel(email:email),
       onModelReady: (viewmodel) {
         viewmodel.setContext(context);
         viewmodel.init();

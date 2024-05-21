@@ -1,30 +1,35 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project_2023/core/init/navigation/app_router.dart';
+
 import '../../../core/constants/enums/locale_keys_enum.dart';
 import '../../../core/init/cache/locale_manager.dart';
 import '../../../core/init/lang/locale_keys.g.dart';
-import '../model/login_model.dart';
+import '../model/register_model.dart';
 import '/core/extension/context_extension.dart';
+
 import 'package:flutter/material.dart';
 import '../../../../core/base/model/base_view_model.dart';
 import 'package:mobx/mobx.dart';
-import "package:firebase_auth/firebase_auth.dart";
 
-part 'login_view_model.g.dart';
+part 'register_view_model.g.dart';
 
-class LoginViewModel = _LoginViewModelBase with _$LoginViewModel;
+class RegisterViewModel = _RegisterViewModelBase with _$RegisterViewModel;
 
-abstract class _LoginViewModelBase with Store, BaseViewModel {
+abstract class _RegisterViewModelBase with Store, BaseViewModel {
   late String? fcmToken;
   late String? deviceId;
   @observable
   bool? rememberMe;
   @observable
-  bool isObscure = true;
+  bool isObscure1 = true;
+  @observable
+  bool isObscure2 = true;
   @observable
   bool isLoading = false;
   @observable
@@ -34,15 +39,18 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
   @observable
   bool hasError = false;
   @observable
-  bool isLoginSuccessfull=false;
+  bool isRegisterSuccessfull=false;
 
   int selectedLanguage = 0;
 
+  EmailOTP myauth = EmailOTP();
+
   final formKey = GlobalKey<FormBuilderState>();
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordController1 = TextEditingController();
+  TextEditingController passwordController2 = TextEditingController();
 
-  late LoginModel loginModel;
+  late RegisterModel registerModel;
 
   @override
   void setContext(BuildContext context) => buildContext = context;
@@ -63,7 +71,11 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     );
     await LocaleManager.instance.setStringValue(
       PreferencesKeys.PASSWORD,
-      passwordController.text,
+      passwordController1.text,
+    );
+    await LocaleManager.instance.setStringValue(
+      PreferencesKeys.PASSWORD,
+      passwordController2.text,
     );
   }
 
@@ -74,7 +86,9 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     if (rememberMe!) {
       emailController.text =
           LocaleManager.instance.getStringValue(PreferencesKeys.EMAIL);
-      passwordController.text =
+      passwordController1.text =
+          LocaleManager.instance.getStringValue(PreferencesKeys.PASSWORD);
+      passwordController2.text =
           LocaleManager.instance.getStringValue(PreferencesKeys.PASSWORD);
     }
   }
@@ -89,29 +103,6 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     isReady = !isReady;
     await Future.delayed(buildContext!.duration100);
     startAnimation = !startAnimation;
-  }
-
-  @action
-  changeHasError() {
-    hasError = !hasError;
-  }
-
-  @action
-  void changeIsObscure() {
-    isObscure = !isObscure;
-  }
-
-  @action
-  void changeIsLoading() {
-    isLoading = !isLoading;
-  }
-
-  void navigateRegisterPage(){
-    buildContext!.router.replace(const RegisterRoute());
-  }
-
-  void navigateForgotPassword(){
-    buildContext!.router.replace(const ResetPasswordRoute());
   }
 
   @action
@@ -135,7 +126,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
                     child: CircularProgressIndicator(
                       color: buildContext!.colorScheme.tertiary,
                     ))
-                    : isLoginSuccessfull
+                    : isRegisterSuccessfull
                     ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -173,14 +164,44 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     );
   }
 
-  Future<void> login() async {
+  @action
+  changeHasError() {
+    hasError = !hasError;
+  }
+
+  @action
+  void changeIsObscure1() {
+    isObscure1 = !isObscure1;
+  }
+
+  @action
+  void changeIsObscure2() {
+    isObscure2 = !isObscure2;
+  }
+
+  @action
+  void changeIsLoading() {
+    isLoading = !isLoading;
+  }
+  void navigateLoginPage(){
+    buildContext!.router.replace(const LoginRoute());
+  }
+
+  Future<void> register() async {
     final _formState = formKey.currentState;
     if (_formState!.validate()) {
-      try{
-        var user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-        buildContext!.router.replace(const HomePageRoute());
-      }catch(e){
+      try {
+        var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController1.text);
+        isRegisterSuccessfull=true;
+        serviceStateDialog();
+        await Future.delayed(const Duration(seconds: 2));
+        buildContext!.router.replace(const LoginRoute());
+      } catch (e) {
         print(e);
+        serviceStateDialog();
+        await Future.delayed(const Duration(seconds: 2));
+        buildContext!.router.pop();
       }
     }
   }

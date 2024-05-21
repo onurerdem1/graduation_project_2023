@@ -49,12 +49,9 @@ extension LanguageExtension on String {
 extension BottombarIconExtension on String {
   String get bottombarIcon {
     switch (this) {
-      case HomepageRoute.name:
+      case HomePageRoute.name:
         return SVGImageConstants.instance.homeIcon;
-      case HistoryPageRoute.name:
-        return SVGImageConstants.instance.calendarIcon;
-      case ProfileRoute.name:
-        return SVGImageConstants.instance.notificationIcon;
+
 
       default:
         return SVGImageConstants.instance.homeIcon;

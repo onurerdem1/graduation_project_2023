@@ -81,7 +81,7 @@ class ResetPasswordView extends StatelessWidget {
               buildButton(
                   context, viewmodel, LocaleKeys.reset_password_send_code,
                   textColor: context.colorScheme.onPrimary,
-                  onPressed: viewmodel.resetPaswwordButtonFunc),
+                  onPressed: viewmodel.resetPasswordButtonFunc),
               SizedBox(height: 10.h),
               //login with activation code button
               buildButton(

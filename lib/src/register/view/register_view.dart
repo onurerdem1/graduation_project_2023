@@ -11,16 +11,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../viewmodel/login_view_model.dart';
+import '../viewmodel/register_view_model.dart';
 
-@RoutePage<String>(name: 'LoginRoute')
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+@RoutePage<String>(name: 'RegisterRoute')
+class RegisterView extends StatelessWidget {
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginViewModel>(
-      viewModel: LoginViewModel(),
+    return BaseView<RegisterViewModel>(
+      viewModel: RegisterViewModel(),
       onModelReady: (viewmodel) {
         viewmodel.setContext(context);
         viewmodel.init();
@@ -57,7 +57,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget buildAnimatedBody(BuildContext context, LoginViewModel viewmodel) {
+  Widget buildAnimatedBody(BuildContext context, RegisterViewModel viewmodel) {
     return Hero(
       tag: ApplicationConstants.ON_BOARD_ID,
       child: AnimatedContainer(
@@ -74,11 +74,10 @@ class LoginView extends StatelessWidget {
                   : Container(),
               descriptionTexts(context),
               buildForm(viewmodel, context),
-              SizedBox(height: 5.h),
-              rememberMeForgotPassword(context, viewmodel),
+              SizedBox(height: 20.h),
               buildLoginButton(context, viewmodel),
-              SizedBox(height: 10.h),
-              dontHaveAccountRegister(context,viewmodel)
+              SizedBox(height: 5.h),
+              dontHaveAccountRegister(context, viewmodel)
             ],
           ),
         ),
@@ -86,62 +85,6 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Row dontHaveAccountRegister(BuildContext context,LoginViewModel viewmodel) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          LocaleKeys.login_dont_have_account.tr(),
-          style: context.textTheme.bodyLarge!
-              .copyWith(color: context.colorScheme.onSurfaceVariant),
-        ),
-        SizedBox(
-          width: 5.w,
-        ),
-        GestureDetector(
-          onTap: () => viewmodel.navigateRegisterPage(),
-          child: Text(
-            LocaleKeys.login_register.tr(),
-            style: context.textTheme.bodyLarge!
-                .copyWith(color: context.colorScheme.onSurfaceVariant),
-          ),
-        )
-      ],
-    );
-  }
-
-  Padding rememberMeForgotPassword(
-      BuildContext context, LoginViewModel viewmodel) {
-    return Padding(
-      padding: context.paddingHorizontal2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Observer(
-            builder: (context) => Checkbox(
-              activeColor: context.colorScheme.tertiary,
-              value: viewmodel.rememberMe,
-              onChanged: (value) => viewmodel.changeRememberMe(value!),
-            ),
-          ),
-          Text(
-            LocaleKeys.login_remember_me.tr(),
-            style: context.textTheme.bodyLarge!
-                .copyWith(color: context.colorScheme.onSurfaceVariant),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () => viewmodel.navigateForgotPassword(),
-            child: Text(
-              LocaleKeys.login_forgot_password.tr(),
-              style: context.textTheme.bodyLarge!
-                  .copyWith(color: context.colorScheme.onSurfaceVariant),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 
   Container descriptionTexts(BuildContext context) {
     return Container(
@@ -152,12 +95,12 @@ class LoginView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            LocaleKeys.login_hello.tr(),
+            LocaleKeys.login_welcome.tr(),
             style: context.textTheme.displayLarge!,
           ),
           SizedBox(height: 5.h),
           Text(
-            LocaleKeys.login_description.tr(),
+            LocaleKeys.login_register_description.tr(),
             style: context.textTheme.bodyMedium!.copyWith(
               color: context.colorScheme.onBackground,
             ),
@@ -181,7 +124,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  FormBuilder buildForm(LoginViewModel viewmodel, BuildContext context) {
+  FormBuilder buildForm(RegisterViewModel viewmodel, BuildContext context) {
     return FormBuilder(
       key: viewmodel.formKey,
       onChanged: () {
@@ -204,9 +147,15 @@ class LoginView extends StatelessWidget {
                     ? AnimatedOpacity(
                         duration: const Duration(milliseconds: 500),
                         opacity: viewmodel.startAnimation ? 1 : 0,
-                        child: buildPasswordTextField(context, viewmodel),
+                        child: buildPasswordTextField1(context, viewmodel),
                       )
                     : Container(),
+                viewmodel.isReady
+                    ? AnimatedOpacity(
+                  duration: const Duration(milliseconds: 500),
+                  opacity: viewmodel.startAnimation ? 1 : 0,
+                  child: buildPasswordTextField2(context, viewmodel),
+                ):Container(),
               ],
             ),
           );
@@ -215,7 +164,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Column buildEmailTextField(BuildContext context, LoginViewModel viewmodel) {
+  Column buildEmailTextField(BuildContext context, RegisterViewModel viewmodel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -255,8 +204,8 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Column buildPasswordTextField(
-      BuildContext context, LoginViewModel viewmodel) {
+  Column buildPasswordTextField1(
+      BuildContext context, RegisterViewModel viewmodel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -270,13 +219,17 @@ class LoginView extends StatelessWidget {
           return SizedBox(
             height: !viewmodel.hasError ? 44.h : 62.h,
             child: FormBuilderTextField(
-              controller: viewmodel.passwordController,
-              name: 'password',
-              obscureText: viewmodel.isObscure,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(
-                    errorText: LocaleKeys.login_password_required.tr()),
-              ]),
+              controller: viewmodel.passwordController1,
+              name: 'password1',
+              obscureText: viewmodel.isObscure1,
+              validator: (value){
+                if(value==null || value.isEmpty){
+                  return LocaleKeys.login_password_required.tr();
+                }
+                if(value.length<6){
+                  return LocaleKeys.login_password_length.tr();
+                }
+              },
               cursorColor: context.colorScheme.tertiary,
               decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
@@ -289,8 +242,8 @@ class LoginView extends StatelessWidget {
                         BorderSide(color: context.colorScheme.onTertiary)),
                 suffixIcon: Observer(builder: (_) {
                   return GestureDetector(
-                    onTap: viewmodel.changeIsObscure,
-                    child: Icon(viewmodel.isObscure
+                    onTap: viewmodel.changeIsObscure1,
+                    child: Icon(viewmodel.isObscure1
                         ? Icons.visibility
                         : Icons.visibility_off),
                   );
@@ -304,16 +257,99 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget buildLoginButton(BuildContext context, LoginViewModel viewmodel) {
+  Column buildPasswordTextField2(
+      BuildContext context, RegisterViewModel viewmodel) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+            padding: context.paddingVertical1,
+            child: Text(
+              LocaleKeys.login_password.tr(),
+              style: context.textTheme.bodyLarge,
+            )),
+        Observer(builder: (_) {
+          return SizedBox(
+            height: !viewmodel.hasError ? 44.h : 62.h,
+            child: FormBuilderTextField(
+              controller: viewmodel.passwordController2,
+              name: 'password2',
+              obscureText: viewmodel.isObscure2,
+              validator: (value){
+                if(value==null || value.isEmpty){
+                  return LocaleKeys.login_password_required.tr();
+                }
+                if(value.length<6){
+                  return LocaleKeys.login_password_length.tr();
+                }
+                if(viewmodel.passwordController1.text!=viewmodel.passwordController2.text){
+                  return LocaleKeys.login_password_match.tr();
+                }
+              },
+              cursorColor: context.colorScheme.tertiary,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                    BorderSide(color: context.colorScheme.tertiary)),
+                filled: true,
+                fillColor: context.colorScheme.background,
+                enabledBorder: UnderlineInputBorder(
+                    borderSide:
+                    BorderSide(color: context.colorScheme.onTertiary)),
+                suffixIcon: Observer(builder: (_) {
+                  return GestureDetector(
+                    onTap: viewmodel.changeIsObscure2,
+                    child: Icon(viewmodel.isObscure2
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                  );
+                }),
+
+              ),
+              style: context.textTheme.headlineSmall,
+            ),
+          );
+        }),
+      ],
+    );
+  }
+
+  Row dontHaveAccountRegister(BuildContext context,RegisterViewModel viewmodel) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          LocaleKeys.login_have_account.tr(),
+          style: context.textTheme.bodyLarge!
+              .copyWith(color: context.colorScheme.onSurfaceVariant),
+        ),
+        SizedBox(
+          width: 5.w,
+        ),
+        GestureDetector(
+          onTap: () => viewmodel.navigateLoginPage(),
+          child: Text(
+            LocaleKeys.login_login.tr(),
+            style: context.textTheme.bodyLarge!
+                .copyWith(color: context.colorScheme.onSurfaceVariant),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildLoginButton(BuildContext context, RegisterViewModel viewmodel) {
     return Container(
       margin: context.paddingHorizontal1,
       padding: context.padding2,
       width: context.width,
       height: 70.h,
       child: ElevatedButton(
-        child: Text(LocaleKeys.login_login.tr()),
-        onPressed: () => viewmodel.login(),
+        child: Text(LocaleKeys.login_register.tr()),
+        onPressed: () => viewmodel.register(),
       ),
     );
   }
 }
+
+

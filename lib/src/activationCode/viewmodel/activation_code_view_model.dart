@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_2023/core/init/navigation/app_router.dart';
 import '../../../../core/base/model/base_view_model.dart';
@@ -12,8 +13,9 @@ class ActivationViewModel = _ActivationViewModelBase with _$ActivationViewModel;
 abstract class _ActivationViewModelBase with Store, BaseViewModel {
   final String email;
   final Future<void> Function() reSendFunc;
+  final EmailOTP resetCodeX;
 
-  _ActivationViewModelBase(this.reSendFunc, {required this.email});
+  _ActivationViewModelBase(this.reSendFunc, this.resetCodeX, {required this.email});
 
   @observable
   bool isLoading = false;
@@ -33,7 +35,9 @@ abstract class _ActivationViewModelBase with Store, BaseViewModel {
     startTimer();
   }
 
-  Future<void> sendAuthCode() async {}
+  Future<void> sendAuthCode() async {
+
+  }
 
   @action
   void startTimer() {
@@ -71,8 +75,12 @@ abstract class _ActivationViewModelBase with Store, BaseViewModel {
     isLoading = !isLoading;
   }
 
-  void navigateCreatePassword() {
-    buildContext!.router.replace(const CreatePasswordRoute());
+  void navigateCreatePassword() async {
+    if (await resetCodeX.verifyOTP(otp: authCodeController.text) == true) {
+      buildContext!.router.replace(CreatePasswordRoute(email:email));
+    } else {
+
+    }
   }
 
   void returnPreviousPage() {

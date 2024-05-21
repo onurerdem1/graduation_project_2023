@@ -1,22 +1,30 @@
 {
     "login": {
         "hello": "Merhaba!",
+        "welcome": "Hoşgeldiniz",
         "description": "Hesabınız ile devam etmek için giriş yapın.",
+        "register_description": "Uygulamaya giriş yapmak için kayıt olun.",
         "username": "Kullanıcı Adı",
         "email": "E-posta",
         "password": "Şifre",
         "login": "Giriş Yap",
         "forgot_password": "Şifreni mi unuttun?",
+        "have_account": "Hesabın var mı?",
         "dont_have_account": "Hesabın yok mu? ",
         "register_here": "Kayıt Ol",
         "register": "Kayıt Ol",
-        "enter_valid_email": "Lütfen geçerli bir e-posta giriniz",
+        "enter_valid_email": "Lütfen geçerli bir e-posta giriniz.",
         "email_required": "E-posta gereklidir.",
-        "password_required": "Lütfen bir şifre giriniz",
+        "password_required": "Lütfen bir şifre giriniz.",
+        "password_length": "Şifre en az 6 karakterden oluşmalı.",
+        "password_match": "Şifreler birbiri ile uyuşmalı.",
         "logout": "Çıkış Yap",
         "remember_me": "Beni Hatırla",
         "login_success": "Giriş başarılı.",
-        "login_error": "Giriş yapılamadı."
+        "login_error": "Giriş yapılamadı.",
+        "register_success": "Kayıt başarılı.",
+        "register_error": "Kayıt yapılamadı.",
+        "email_exist": "E posta zaten kayıtlı! "
     },
     "reset_password": {
         "email_Phone": "E Mail",

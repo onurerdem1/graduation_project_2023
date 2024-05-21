@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
+import '../../../src/register/view/register_view.dart';
 import '../../../src/splash/view/splash_view.dart';
 import '../../../src/login/view/login_view.dart';
 import '../../../src/forgotPassword/view/forgot_password_view.dart';
 import '../../../src/activationCode/view/activation_code_view.dart';
 import '../../../src/createPassword/view/create_password_view.dart';
-import '../../../src/autotabs/view/auto_tabs_view.dart';
-import '../../../src/autotabs/subviews/homepage/view/homepage_view.dart';
-import '../../../src/autotabs/subviews/profile/view/profile_view.dart';
-import '../../../src/autotabs/subviews/saleHistory/view/history_view.dart';
+import '../../../src/home/view/home_view.dart';
+
 
 part 'app_router.gr.dart';
 
@@ -36,20 +36,14 @@ class AppRouter extends _$AppRouter {
           page: CreatePasswordRoute.page,
           path: '/createPassword',
         ),
-        AutoRoute(page: AutoTabsRoute.page, path: '/autoTabs', children: [
-          AutoRoute(
-            page: HomepageRoute.page,
-            path: 'homePage',
+        AutoRoute(
+          page: HomePageRoute.page,
+          path: '/homePage',
           ),
-          AutoRoute(
-            page: HistoryPageRoute.page,
-            path: 'history',
-          ),
-          AutoRoute(
-            page: ProfileRoute.page,
-            path: 'profile',
-          ),
-        ])
+        AutoRoute(
+          page: RegisterRoute.page,
+          path: '/register',
+        ),
         //routes
       ];
 }

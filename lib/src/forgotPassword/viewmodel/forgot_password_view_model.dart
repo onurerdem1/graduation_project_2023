@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,89 +28,64 @@ abstract class _ResetPasswordViewModelBase with Store, BaseViewModel {
   @observable
   bool isSendCodeSuccessfull = false;
 
+  EmailOTP resetCode = EmailOTP();
+
+
   final formKey = GlobalKey<FormBuilderState>();
   TextEditingController emailController = TextEditingController();
 
   @override
   void setContext(BuildContext context) => buildContext = context;
+
   @override
   Future<void> init() async {
     await startAnimationSequence();
   }
 
-  Future<void> resetPaswwordButtonFunc() async {
+  Future<void> resetPasswordButtonFunc() async {
     await sendResetPasswordCode();
     if (isSendCodeSuccessfull) {
-      navigateActivationPage();
-    }
-  }
-
-  @action
-  void serviceStateDialog() {
-    showDialog(
-      barrierDismissible: false,
-      context: buildContext!,
-      builder: (context) {
-        return Dialog(
-          elevation: 0,
-          child: Container(
-            width: context.width,
-            height: 200.h,
-            decoration: BoxDecoration(
-              color: context.colorScheme.background,
-            ),
-            child: Observer(
-              builder: (context) {
-                return isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(
-                        color: buildContext!.colorScheme.tertiary,
-                      ))
-                    : isSendCodeSuccessfull
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.check,
-                                color: buildContext!.colorScheme.tertiary,
-                                size: 32.w,
-                              ),
-                              SizedBox(height: 10.h),
-                              Text(LocaleKeys
-                                  .reset_password_code_send_successfull
-                                  .tr())
-                            ],
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.error,
-                                color: buildContext!.colorScheme.error,
-                                size: 32.w,
-                              ),
-                              SizedBox(height: 10.h),
-                              Text(LocaleKeys.reset_password_code_send_error
-                                  .tr())
-                            ],
-                          );
-              },
-            ),
-          ),
-        );
-      },
-    );
+    returnLogin();
+     }
   }
 
   @action
   Future<void> sendResetPasswordCode() async {
-    changeIsLoading();
-    serviceStateDialog();
-    if (formKey.currentState != null) {}
-    changeIsLoading();
-    await Future.delayed(const Duration(seconds: 2));
-    buildContext!.router.pop();
+    final formState = formKey.currentState;
+    if (formState!.validate()) {
+      try{
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+        isSendCodeSuccessfull=true;
+        serviceStateDialog();
+        await Future.delayed(Duration(seconds: 2));
+        buildContext!.router.pop();
+      }catch(e){
+        isSendCodeSuccessfull=false;
+        serviceStateDialog();
+        await Future.delayed(Duration(seconds: 2));
+        buildContext!.router.pop();
+      }
+      // resetCode.setConfig(
+      //     appEmail: "oevcil7@gmail.com",
+      //     appName: "ShopAI",
+      //     userEmail: emailController.text,
+      //     otpLength: 6,
+      //     otpType: OTPType.digitsOnly
+      // );
+      // if (await resetCode.sendOTP() == true) {
+      //   isSendCodeSuccessfull=true;
+      //   serviceStateDialog();
+      //   await Future.delayed(Duration(seconds: 2));
+      //   buildContext!.router.pop();
+      // } else {
+      //   isSendCodeSuccessfull=false;
+      //   serviceStateDialog();
+      //   await Future.delayed(Duration(seconds: 2));
+      //   buildContext!.router.pop();
+      // }
+    }
   }
+
 
   Future<void> startAnimationSequence() async {
     await Future.delayed(buildContext!.duration400);
@@ -130,11 +107,68 @@ abstract class _ResetPasswordViewModelBase with Store, BaseViewModel {
   void navigateActivationPage() {
     buildContext!.router.push(
       ActivationPageRoute(
-          email: emailController.text, resendCodeFunc: sendResetPasswordCode),
+        email: emailController.text, resendCodeFunc: sendResetPasswordCode, resetCodeX: resetCode),
     );
   }
 
   void returnLogin() {
-    buildContext!.router.pop();
+    buildContext!.router.replace(const LoginRoute());
+  }
+
+  @action
+  void serviceStateDialog() {
+    showDialog(
+      barrierDismissible: false,
+      context: buildContext!,
+      builder: (context) {
+        return Dialog(
+          elevation: 0,
+          child: Container(
+            width: context.width,
+            height: 200.h,
+            decoration: BoxDecoration(
+              color: context.colorScheme.background,
+            ),
+            child: Observer(
+              builder: (context) {
+                return isLoading
+                    ? Center(
+                    child: CircularProgressIndicator(
+                      color: buildContext!.colorScheme.tertiary,
+                    ))
+                    : isSendCodeSuccessfull
+                    ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.check,
+                      color: buildContext!.colorScheme.tertiary,
+                      size: 32.w,
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(LocaleKeys
+                        .reset_password_code_send_successfull
+                        .tr())
+                  ],
+                )
+                    : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error,
+                      color: buildContext!.colorScheme.error,
+                      size: 32.w,
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(LocaleKeys.reset_password_code_send_error
+                        .tr())
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 }

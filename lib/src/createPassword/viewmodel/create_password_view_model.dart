@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project_2023/core/extension/string_extension.dart';
 
@@ -15,6 +16,10 @@ class CreatePasswordViewModel = _CreatePasswordViewModelBase
     with _$CreatePasswordViewModel;
 
 abstract class _CreatePasswordViewModelBase with Store, BaseViewModel {
+  final String email;
+
+  _CreatePasswordViewModelBase({required this.email});
+
   @observable
   bool isObscure = true;
   @observable
@@ -37,7 +42,8 @@ abstract class _CreatePasswordViewModelBase with Store, BaseViewModel {
     await startAnimationSequence();
   }
 
-  Future<void> createNewPassword() async {}
+  Future<void> createNewPassword() async {
+  }
 
   void showResponseMessage(bool responseType) {
     showDialog(
