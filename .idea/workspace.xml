@@ -4,40 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64f70f6-e264-44f7-8159-3400c84ced0b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/languages/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/languages/en-US.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation_project_2023.iml" beforeDir="false" afterPath="$PROJECT_DIR$/graduation_project_2023.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/extension/string_extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/extension/string_extension.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/init/navigation/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/init/navigation/app_router.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/activationCode/view/activation_code_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/activationCode/view/activation_code_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/activationCode/viewmodel/activation_code_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/activationCode/viewmodel/activation_code_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/homepage/view/homepage_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/homepage/viewmodel/homepage_view_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/profile/view/profile_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/profile/viewmodel/profile_view_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/saleHistory/view/history_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/subviews/saleHistory/viewmodel/history_view_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/view/auto_tabs_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/autotabs/viewmodel/auto_tabs_view_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/createPassword/view/create_password_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/createPassword/view/create_password_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/createPassword/viewmodel/create_password_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/createPassword/viewmodel/create_password_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/forgotPassword/view/forgot_password_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/forgotPassword/view/forgot_password_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/forgotPassword/viewmodel/forgot_password_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/forgotPassword/viewmodel/forgot_password_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/login/view/login_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/login/view/login_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/login/viewmodel/login_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/login/viewmodel/login_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
-    </list>
+    <list default="true" id="c64f70f6-e264-44f7-8159-3400c84ced0b" name="Changes" comment="first commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,6 +102,15 @@
       <option name="presentableId" value="Default" />
       <updated>1715545925588</updated>
     </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1716316953287</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716316953287</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -165,5 +141,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
 </project>
